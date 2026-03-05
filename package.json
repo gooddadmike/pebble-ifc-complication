@@ -1,0 +1,34 @@
+{
+  "name": "pebble-ifc-complication",
+  "version": "1.0.0",
+  "description": "International Fixed Calendar complication/widget for Pebble watchfaces",
+  "keywords": [
+    "pebble-package",
+    "pebble",
+    "rebble",
+    "watchface",
+    "complication",
+    "widget",
+    "calendar",
+    "ifc"
+  ],
+  "pebble": {
+    "sdkVersion": "3",
+    "targetPlatforms": ["aplite", "basalt", "chalk", "diorite", "emery"]
+  },
+  "homepage": "https://github.com/gooddadmike/pebble-ifc-complication#readme",
+  "bugs": {
+    "url": "https://github.com/gooddadmike/pebble-ifc-complication/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/gooddadmike/pebble-ifc-complication.git"
+  },
+  "license": "MIT",
+  "author": "mike@searcy.me",
+  "type": "commonjs",
+  "main": "ifc-comlication.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
