@@ -25,7 +25,7 @@ function update(config = {}) {
   const doy = Math.round((date - new Date(year, 0, 1)) / 86400000) + 1;
 
   // Special days
-  if (isLeap && doy === 181) {
+  if (isLeap && doy === 169) {
     return 'Jun 29 LPD';
   }
   if (doy === (isLeap ? 366 : 365)) {
@@ -33,7 +33,7 @@ function update(config = {}) {
   }
 
   // Normal days – offset after Leap Day
-  const adjDoy = isLeap && doy > 181 ? doy - 1 : doy;
+  const adjDoy = isLeap && doy > 169 ? doy - 1 : doy;
 
   const monthIndex = Math.floor((adjDoy - 1) / 28);
   const dayOfMonth = (adjDoy - 1) % 28 + 1;
