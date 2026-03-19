@@ -22,7 +22,7 @@ function update(config = {}) {
   const isLeap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
 
   // Day of year: Jan 1 = 1
-  const doy = Math.floor((date - new Date(year, 0, 1)) / 86400000) + 1;
+  const doy = Math.round((date - new Date(year, 0, 1)) / 86400000) + 1;
 
   // Special days
   if (isLeap && doy === 181) {
