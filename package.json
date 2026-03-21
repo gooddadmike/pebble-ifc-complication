@@ -13,7 +13,9 @@
     "ifc"
   ],
   "pebble": {
+    "displayName": "pebble-ifc-complication",
     "sdkVersion": "3",
+    "enableMiltiJS": "true",
     "targetPlatforms": [
       "aplite",
       "basalt",
@@ -33,7 +35,7 @@
   "license": "MIT",
   "author": "mike@searcy.me",
   "type": "commonjs",
-  "main": "ifc-comlication.js",
+  "main": "ifc-complication.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   }
