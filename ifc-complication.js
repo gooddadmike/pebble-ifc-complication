@@ -1,48 +1,30 @@
 // ifc-complication.js
 // Reusable International Fixed Calendar widget for Pebble watchfaces
 // Usage: const ifc = require('pebble-ifc-complication');
-//       textLayer.text = ifc.update({ useUTC: true });
+//        textLayer.text = ifc.update();
+//        textLayer.text = ifc.update('2024-06-17');
 
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Sol', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const { toIFC } = require('@gooddadmike/ifc-js');
+
+const IFC_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Sol',
+                   'Jul','Aug','Sep','Oct','Nov','Dec'];
+const WEEKDAYS  = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
 /**
- * Calculates the current IFC date and returns a formatted string.
- * @param {Object} [config] - Optional config
- * @param {boolean} [config.useUTC=false] - Use UTC time for date calculation
- * @returns {string} Formatted IFC date, e.g. "Mar 1 Sun" or "Jun 29 LPD"
+ * Returns an IFC date as a watch-friendly string.
+ * @param {string} [date] - ISO date string e.g. '2024-06-17'. Omit for today.
+ * @returns {string} e.g. "Mar 1 Sun", "Jun 29 LPD", "Dec 29 YRD"
  */
-function update(config = {}) {
-  const { useUTC = false } = config;
+function update(date) {
+  const ifc = toIFC(date);
 
-  const now = new Date();
-  const date = useUTC ? new Date(now.toUTCString()) : now;
+  if (ifc.isLeapDay) return 'Jun 29 LPD';
+  if (ifc.isYearDay) return 'Dec 29 YRD';
 
-  const year = date.getFullYear();
-  const isLeap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
-
-  // Day of year: Jan 1 = 1
-  const doy = Math.round((date - new Date(year, 0, 1)) / 86400000) + 1;
-
-  // Special days
-  if (isLeap && doy === 169) {
-    return 'Jun 29 LPD';
-  }
-  if (doy === (isLeap ? 366 : 365)) {
-    return 'Dec 29 YRD';
-  }
-
-  // Normal days – offset after Leap Day
-  const adjDoy = isLeap && doy > 169 ? doy - 1 : doy;
-
-  const monthIndex = Math.floor((adjDoy - 1) / 28);
-  const dayOfMonth = (adjDoy - 1) % 28 + 1;
-
-  const month = months[monthIndex];
-  const weekdayNum = ((dayOfMonth - 1) % 7) + 1;
-  const weekday = weekdays[weekdayNum - 1];
-
-  return `${month} ${dayOfMonth} ${weekday}`;
+  const month   = IFC_SHORT[ifc.month - 1];
+  const weekday = WEEKDAYS[ifc.weekday];
+  return `${month} ${ifc.day} ${weekday}`;
 }
 
 module.exports = { update };
+
