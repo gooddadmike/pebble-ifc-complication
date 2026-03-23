@@ -1,6 +1,6 @@
 {
   "name": "pebble-ifc-complication",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "International Fixed Calendar complication/widget for Pebble watchfaces",
   "main": "ifc-complication.js",
   "keywords": [
@@ -17,7 +17,13 @@
     "displayName": "pebble-ifc-complication",
     "sdkVersion": "3",
     "enableMultiJS": true,
-    "targetPlatforms": ["aplite", "basalt", "chalk", "diorite", "emery"]
+    "targetPlatforms": [
+      "aplite",
+      "basalt",
+      "chalk",
+      "diorite",
+      "emery"
+    ]
   },
   "dependencies": {
     "@gooddadmike/ifc-js": "^1.0.1"
